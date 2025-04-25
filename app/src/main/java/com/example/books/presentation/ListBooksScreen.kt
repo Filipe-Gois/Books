@@ -1,11 +1,9 @@
 package com.example.books.presentation
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.border
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,10 +23,14 @@ fun ListBooksScreen(innerPadding: PaddingValues) {
     ) {
         books.forEach { book ->
             item {
-                BookCard(book)
+                BookCard(book) {
+                    Log.i("livro", "deletando ${it.title}")
+                    books.remove(book)
+                    Log.i("livro", "deletando ${it.title}")
+                    Log.i("livro", books.count().toString());
+                }
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
-
 }

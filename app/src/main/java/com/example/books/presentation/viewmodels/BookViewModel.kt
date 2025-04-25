@@ -18,7 +18,7 @@ data object Fiction : BookType(Purple80, PurpleGrey40)
 data object NonFiction : BookType(Purple40, PurpleGrey80)
 
 
-val books: List<BookViewModel> = listOf(
+val books = mutableListOf(
     BookViewModel(title = "1984", author = "George Orwell", read = true),
     BookViewModel(title = "Dom Casmurro", author = "Machado de Assis", bookType = NonFiction),
     BookViewModel(
