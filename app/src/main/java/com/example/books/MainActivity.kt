@@ -15,8 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.books.presentation.ListBooksScreen
+import com.example.books.presentation.viewmodels.ListBooksViewModel
+import com.example.books.presentation.viewmodels.books
 import com.example.books.ui.theme.BooksTheme
+import com.example.books.utils.Screen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,15 +32,23 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column() {
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.BooksListScreen.route,
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
 
-                        ListBooksScreen(innerPadding)
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
-                            contentDescription = null
-                        )
+                        composable(route = Screen.BooksListScreen.route) {
+                            val books = viewModel<ListBooksViewModel>()
+                            ListBooksScreen(navController, books)
+
+                        }
+
 
                     }
+
+
                 }
             }
         }

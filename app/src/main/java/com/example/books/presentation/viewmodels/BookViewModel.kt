@@ -17,7 +17,6 @@ sealed class BookType(val backgroundColor: Color, val foregroundColor: Color)
 data object Fiction : BookType(Purple80, PurpleGrey40)
 data object NonFiction : BookType(Purple40, PurpleGrey80)
 
-
 val books = mutableListOf(
     BookViewModel(title = "1984", author = "George Orwell", read = true),
     BookViewModel(title = "Dom Casmurro", author = "Machado de Assis", bookType = NonFiction),
@@ -29,5 +28,4 @@ val books = mutableListOf(
     ),
     BookViewModel(title = "A Revolução dos Bichos", author = "George Orwell"),
     BookViewModel(title = "O Pequeno Príncipe", author = "Antoine de Saint-Exupéry", read = true),
-
-    )
+)

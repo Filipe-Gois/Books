@@ -1,14 +1,12 @@
 package com.example.books.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -45,12 +43,15 @@ fun BookCard(book: BookViewModel, onDeleteClick: (BookViewModel) -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    title,
-                    style = TextStyle(fontSize = 32.sp, color = bookType.foregroundColor),
-                    maxLines = 1,
-                    overflow = TextOverflow.Clip
-                )
+                Column {
+                    Text(
+                        title,
+                        style = TextStyle(fontSize = 32.sp, color = bookType.foregroundColor),
+                        maxLines = 1,
+                        overflow = TextOverflow.Clip
+                    );
+
+                }
                 if (read) Icon(
                     imageVector = Icons.Filled.Check,
 //                    modifier = Modifier.height(70.dp),
