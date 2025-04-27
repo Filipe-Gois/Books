@@ -16,10 +16,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.books.presentation.AddEditBooksScreen
 import com.example.books.presentation.ListBooksScreen
+import com.example.books.presentation.viewmodels.AddEditBookViewModel
 import com.example.books.presentation.viewmodels.ListBooksViewModel
 import com.example.books.presentation.viewmodels.books
 import com.example.books.ui.theme.BooksTheme
@@ -38,16 +42,25 @@ class MainActivity : ComponentActivity() {
                         startDestination = Screen.BooksListScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-
                         composable(route = Screen.BooksListScreen.route) {
                             val books = viewModel<ListBooksViewModel>()
                             ListBooksScreen(navController, books)
-
                         }
-
-
+                        composable(
+                            route = Screen.AddEditBookScreen.route + "?bookId={bookId}",
+                            arguments = listOf(
+                                navArgument(name = "bookId") {
+                                    type = NavType.StringType
+                                    defaultValue = "-1"
+                                })
+                        ) { navBackStackEntry ->
+                            val bookId = navBackStackEntry.arguments?.getString("bookId") ?: "-1"
+                            val viewModel = viewModel<AddEditBookViewModel>() {
+                                AddEditBookViewModel(bookId)
+                            }
+                            AddEditBooksScreen(navController, viewModel)
+                        }
                     }
-
 
                 }
             }

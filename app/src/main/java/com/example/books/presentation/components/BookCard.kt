@@ -28,14 +28,18 @@ import com.example.books.R
 import com.example.books.presentation.viewmodels.BookViewModel
 
 @Composable
-fun BookCard(book: BookViewModel, onDeleteClick: (BookViewModel) -> Unit) {
-    val (title, author, read, bookType) = book
+fun BookCard(book: BookViewModel, onDeleteClick: (BookViewModel) -> Unit, modifier: Modifier) {
+    val title = book.title
+    val author = book.author
+    val read = book.read
+    val bookType = book.bookType
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = bookType.backgroundColor, shape = RoundedCornerShape(10.dp))
+            .background(color = book.bookType.backgroundColor, shape = RoundedCornerShape(10.dp))
             .padding(16.dp)
+            .then(modifier)
     ) {
         Column {
             Row(
@@ -46,19 +50,19 @@ fun BookCard(book: BookViewModel, onDeleteClick: (BookViewModel) -> Unit) {
                 Column {
                     Text(
                         title,
-                        style = TextStyle(fontSize = 32.sp, color = bookType.foregroundColor),
+                        style = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
                         maxLines = 1,
                         overflow = TextOverflow.Clip
                     );
 
                 }
-                if (read) Icon(
+                if (book.read) Icon(
                     imageVector = Icons.Filled.Check,
 //                    modifier = Modifier.height(70.dp),
                     contentDescription = stringResource(id = R.string.delete)
                 )
             }
-            Text(author, style = TextStyle(color = bookType.foregroundColor))
+            Text(author, style = TextStyle(color = book.bookType.foregroundColor))
         }
         IconButton(
             onClick = { onDeleteClick(book) },
