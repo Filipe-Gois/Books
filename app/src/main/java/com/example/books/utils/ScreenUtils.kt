@@ -1,7 +1,7 @@
 package com.example.books.utils
+import kotlinx.serialization.Serializable
+@Serializable
+object BooksListScreen
 
-sealed class Screen (val route : String) {
-
-    data object  BooksListScreen : Screen("/booksListScreen")
-    data object  AddEditBookScreen : Screen("/addEditBookScreen")
-}
+@Serializable
+data class AddEditBooksScreen(val bookId: Int)
